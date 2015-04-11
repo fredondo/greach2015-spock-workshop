@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.7
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Enterprise new mission'
+    }
+}
+
+repositories {
+    mavenCentral()
+	jcenter()
+}
+
+dependencies {
+	testCompile 'org.codehaus.groovy:groovy-all:2.4.3'
+	testCompile	 group:'org.spockframework', name:'spock-core', version:'1.0-groovy-2.4'
+	testCompile	'org.hamcrest:hamcrest-all:1.3'
+	testCompile 'cglib:cglib-nodep:2.2'       // For mocking classes
+	testCompile 'org.gebish:geb-spock:0.10.0'
+	testCompile "org.seleniumhq.selenium:selenium-chrome-driver:2.43.1"
+}
+
+test {
+	
+	
+	//systemProperty "geb.env", driver
+	// If you wanted to set the baseUrl in your build…
+	// systemProperty "geb.build.baseUrl", "http://myapp.com"
+	
+	include '**/*Spec.*'
+}
+
